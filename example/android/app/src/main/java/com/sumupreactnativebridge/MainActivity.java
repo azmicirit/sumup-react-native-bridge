@@ -1,4 +1,4 @@
-package com.example.sumupreactnativebridge;
+package com.sumupreactnativebridge;
 
 import com.facebook.react.ReactActivity;
 

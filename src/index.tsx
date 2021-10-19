@@ -1,22 +1,32 @@
-import { NativeModules, Platform } from 'react-native';
+import { NativeModules } from 'react-native';
 
-const LINKING_ERROR =
-  `The package 'sumup-react-native-bridge' doesn't seem to be linked. Make sure: \n\n` +
-  Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
-  '- You rebuilt the app after installing the package\n' +
-  '- You are not using Expo managed workflow\n';
+const { SumupReactNativeBridge } = NativeModules;
 
-const SumupReactNativeBridge = NativeModules.SumupReactNativeBridge
-  ? NativeModules.SumupReactNativeBridge
-  : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    );
+type SuccessResultType = {
+  success: boolean;
+};
 
-export function multiply(a: number, b: number): Promise<number> {
-  return SumupReactNativeBridge.multiply(a, b);
+type CheckoutRequestType = {
+  title: string;
+  totalAmount: number;
+  currencyCode: string;
+  foreignID: string;
+  skipScreenOptions?: boolean;
+};
+
+type SuccessCheckoutType = {
+  success: boolean;
+  transactionCode: string;
+};
+
+interface SumupReactNativeBridgeInterface {
+  setupAPIKey(apiKey: string): Promise<SuccessResultType>; // FOR ONLY IOS
+  login(accessToken: string): Promise<SuccessResultType>; // FOR ONLY IOS
+  login(apiKey: string, accessToken: string): Promise<SuccessResultType>; // FOR ONLY ANDROID
+  logout(): Promise<boolean>;
+  isLoggedIn(): Promise<boolean>;
+  preferences(): Promise<SuccessResultType>;
+  checkout(request: CheckoutRequestType): Promise<SuccessCheckoutType>;
 }
+
+export default SumupReactNativeBridge as SumupReactNativeBridgeInterface;

@@ -51,9 +51,12 @@ repositories {
     google()
     mavenCentral()
     jcenter()
+    maven { url 'https://maven.sumup.com/releases' }
 }
 
 dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    // Sumup SDK
+    implementation 'com.sumup:merchant-sdk:3.3.2'
 }
