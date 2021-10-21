@@ -2,8 +2,11 @@ import { NativeModules } from 'react-native';
 
 const { SumupReactNativeBridge } = NativeModules;
 
-type SuccessResultType = {
+type LoginResponseType = {
   success: boolean;
+  code?: number;
+  message?: string;
+  invalidToken?: boolean;
 };
 
 type CheckoutRequestType = {
@@ -14,19 +17,24 @@ type CheckoutRequestType = {
   skipScreenOptions?: boolean;
 };
 
-type SuccessCheckoutType = {
+type ResponseType = {
   success: boolean;
-  transactionCode: string;
+  code?: number;
+  message?: string;
+  transactionCode?: string;
+  transactionInfo?: string;
+  invalidToken?: boolean;
+  notLoggedIn?: boolean;
 };
 
 interface SumupReactNativeBridgeInterface {
-  setupAPIKey(apiKey: string): Promise<SuccessResultType>; // FOR ONLY IOS
-  login(accessToken: string): Promise<SuccessResultType>; // FOR ONLY IOS
-  login(apiKey: string, accessToken: string): Promise<SuccessResultType>; // FOR ONLY ANDROID
+  setupAPIKey(apiKey: string): Promise<boolean>; // FOR ONLY IOS
+  login(accessToken: string): Promise<LoginResponseType>; // FOR ONLY IOS
+  login(apiKey: string, accessToken: string): Promise<LoginResponseType>; // FOR ONLY ANDROID
   logout(): Promise<boolean>;
   isLoggedIn(): Promise<boolean>;
-  preferences(): Promise<SuccessResultType>;
-  checkout(request: CheckoutRequestType): Promise<SuccessCheckoutType>;
+  preferences(): Promise<ResponseType>;
+  payment(request: CheckoutRequestType): Promise<ResponseType>;
 }
 
 export default SumupReactNativeBridge as SumupReactNativeBridgeInterface;

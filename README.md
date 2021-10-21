@@ -14,24 +14,31 @@ Add maven repository into build.gradle *(./android/bundle.gradle)*
 allprojects {
   ...
   repositories { 
-    maven { url 'https://maven.sumup.com/releases' 
-  }
+    maven { url 'https://maven.sumup.com/releases' }
 }
 ```
 
 ## Usage
 
-Please check out sample project.
+Please check out example project.
 
 ```
-  setupAPIKey(apiKey: string): Promise<SuccessResultType>; // FOR ONLY IOS
-  login(accessToken: string): Promise<SuccessResultType>; // FOR ONLY IOS
-  login(apiKey: string, accessToken: string): Promise<SuccessResultType>; // FOR ONLY ANDROID
+  setupAPIKey(apiKey: string): Promise<boolean>; // FOR ONLY IOS
+  login(accessToken: string): Promise<LoginResponseType>; // FOR ONLY IOS
+  login(apiKey: string, accessToken: string): Promise<LoginResponseType>; // FOR ONLY ANDROID
   logout(): Promise<boolean>;
   isLoggedIn(): Promise<boolean>;
-  preferences(): Promise<SuccessResultType>;
-  checkout(request: CheckoutRequestType): Promise<SuccessCheckoutType>;
+  preferences(): Promise<ResponseType>;
+  payment(request: CheckoutRequestType): Promise<ResponseType>;
 ```
+
+##### External Error Codes: #####
+
+**404**
+: RootView cannot be null (for only iOS)
+
+**500**
+: Fatal Error
 
 ## Contributing
 
