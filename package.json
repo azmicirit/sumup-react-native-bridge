@@ -1,6 +1,6 @@
 {
   "name": "sumup-react-native-bridge",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "SumUp SDK Bridge",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
