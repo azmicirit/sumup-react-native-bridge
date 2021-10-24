@@ -78,7 +78,7 @@ class SumupReactNativeBridge: NSObject {
                 return resolve(["success": false, "code": 404, "message": "RootView cannot be null"])
             }
             
-            rootView.definesPresentationContext = true
+            rootView.dismiss(animated: false)
             
             SumUpSDK.presentCheckoutPreferences(from: rootView, animated: true) { (success: Bool, error: Error?) in
                 if let safeError = error as NSError? {
@@ -116,7 +116,7 @@ class SumupReactNativeBridge: NSObject {
                 return resolve(["success": false, "code": 404, "message": "RootView cannot be null"])
             }
             
-            rootView.definesPresentationContext = true
+            rootView.dismiss(animated: false)
             
             SumUpSDK.checkout(with: checkOutRequest, from: rootView) { (result: CheckoutResult?, error: Error?) in
                 if let safeError = error as NSError? {
