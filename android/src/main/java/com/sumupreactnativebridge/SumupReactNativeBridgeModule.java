@@ -143,13 +143,14 @@ public class SumupReactNativeBridgeModule extends ReactContextBaseJavaModule {
                   map.putString("transactionCode", extra.getString(SumUpAPI.Response.TX_CODE));
                   map.putString("transactionInfo", extra.getString(SumUpAPI.Response.TX_INFO));
                   sumUpPromise.resolve(map);
-                } else
+                } else {
                   map.putBoolean("success", false);
                   map.putInt("code", extra.getInt(SumUpAPI.Response.RESULT_CODE));
                   map.putString("message", extra.getString(SumUpAPI.Response.MESSAGE));
                   map.putBoolean("invalidToken", extra.getInt(SumUpAPI.Response.RESULT_CODE) == SumUpAPI.Response.ResultCode.ERROR_INVALID_TOKEN);
                   map.putBoolean("notLoggedIn", extra.getInt(SumUpAPI.Response.RESULT_CODE) == SumUpAPI.Response.ResultCode.ERROR_NOT_LOGGED_IN);
                   sumUpPromise.resolve(map);
+                }
               }
             }
             break;
@@ -168,8 +169,6 @@ public class SumupReactNativeBridgeModule extends ReactContextBaseJavaModule {
             }
             break;
           default:
-            map.putBoolean("success", false);
-            sumUpPromise.resolve(map);
             break;
         }
       }
