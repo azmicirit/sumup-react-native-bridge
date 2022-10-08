@@ -13,14 +13,14 @@ import SumupSDK from '../../src/index';
 const TestScreen = () => {
   const [token, setToken] = useState('');
 
-  const apiKey = '<SumUp Affiliate Key>';
+  const affiliateKey = '<SumUp Affiliate Key>';
   const accessToken = '<SumUp Access Token>';
   const refreshToken = '<SumUp Refresh Token>';
 
   useEffect(() => {
     (async () => {
       if (Platform.OS === 'ios') {
-        const result = await SumupSDK.setupAPIKey(apiKey);
+        const result = await SumupSDK.setupAPIKey(affiliateKey);
         console.log('SETUP API KEY', result);
       }
     })();
@@ -50,9 +50,9 @@ const TestScreen = () => {
   const loginBtnClicked = async () => {
     let result = null;
     if (Platform.OS === 'ios') {
-      result = await SumupSDK.login(accessToken);
+      result = await SumupSDK.login(accessToken || '');
     } else {
-      result = await SumupSDK.login(apiKey, accessToken);
+      result = await SumupSDK.login(affiliateKey);
     }
     console.log(Platform.OS, result?.success, result);
   };
