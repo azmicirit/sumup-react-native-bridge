@@ -51,14 +51,14 @@ public class SumupReactNativeBridgeModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void login(String affiliateKey, String token, Promise promise) {
+    public void login(String affiliateKey, Promise promise) {
       if (SumUpAPI.isLoggedIn()) {
         WritableMap map = Arguments.createMap();
         map.putBoolean("success", true);
         promise.resolve(map);
       } else {
         sumUpPromise = promise;
-        SumUpLogin sumupLogin = SumUpLogin.builder(affiliateKey).accessToken(token).build();
+        SumUpLogin sumupLogin = SumUpLogin.builder(affiliateKey).build();
         SumUpAPI.openLoginActivity(getCurrentActivity(), sumupLogin, REQUEST_CODE_LOGIN);
       }
     }
