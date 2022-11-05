@@ -23,9 +23,9 @@ allprojects {
 Please check out example project.
 
 ```
-  setupAPIKey(affiliateKey: string): Promise<boolean>; // FOR ONLY IOS
+  setupAPIKey(apiKey: string): Promise<boolean>; // FOR ONLY IOS
   login(accessToken: string): Promise<LoginResponseType>; // FOR ONLY IOS
-  login(affiliateKey: string): Promise<LoginResponseType>; // FOR ONLY ANDROID
+  login(apiKey: string, accessToken: string): Promise<LoginResponseType>; // FOR ONLY ANDROID
   logout(): Promise<boolean>;
   isLoggedIn(): Promise<boolean>;
   preferences(): Promise<ResponseType>;
