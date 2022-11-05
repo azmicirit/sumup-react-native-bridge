@@ -26,6 +26,7 @@ Please check out example project.
   setupAPIKey(apiKey: string): Promise<boolean>; // FOR ONLY IOS
   login(accessToken: string): Promise<LoginResponseType>; // FOR ONLY IOS
   login(apiKey: string, accessToken: string): Promise<LoginResponseType>; // FOR ONLY ANDROID
+  loginWithoutToken(String affiliateKey, Promise promise); // FOR ONLY ANDROID
   logout(): Promise<boolean>;
   isLoggedIn(): Promise<boolean>;
   preferences(): Promise<ResponseType>;
